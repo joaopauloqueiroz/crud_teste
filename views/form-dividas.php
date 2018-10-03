@@ -46,7 +46,7 @@
     <div class="form-group">
     <label for="descricao">Descrição</label>
     <textarea name="descricao" id="descricao"  cols="30" rows="10" class="form-control" placeholder="Descrição da divida"><?php echo (isset($data))?$data->descricao:"";?></textarea></div>
-    <input type="hidden" name="user_id" value="<?php echo $_POST['id'];?>">
+    <input type="hidden" name="id" value="<?php echo $_POST['id'];?>">
     <input type="hidden" name="user_id" value="<?php echo (isset($data))? $data->user_id : "" ;?>">
     <input type="submit" value="Salvar" class="btn btn-success">
   </form>
