@@ -46,6 +46,7 @@ $div = new Divida;
             <th>Valor</th>
             <th>Vencimento</th>
             <th>Decrição</th>
+            <th>Ação</th>
         </tr>
         <?php
 
