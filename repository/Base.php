@@ -135,5 +135,13 @@ class Base extends PDO
 
         return $res;
     }
+    /**
+     * Dletar um registro
+     */
 
+     public function delete($id){
+        $this->query("DELETE FROM $this->table WHERE id = :id", array(
+            ":id" => $id,
+        ));
+     }
 }
