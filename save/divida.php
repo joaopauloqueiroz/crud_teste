@@ -9,7 +9,7 @@ if (isset($_POST['update'])) {
     if ($valid->validate($_POST)) {
         $res = $div->query->updateDivida(array(
       "identificador" => $_POST['identificador'],
-      "valor" => $_POST['valor'],
+      "valor" => 100.00,
       "vencimento" => $_POST['vencimento'],
       "descricao" => $_POST['descricao'],
       "user_id" => $_POST['user_id'],

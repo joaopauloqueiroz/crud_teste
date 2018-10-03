@@ -22,7 +22,6 @@ class Base extends PDO
         $this->setParams($stmt, $params);
         
         $stmt->execute();
-        
         return $stmt;
     }
 
@@ -86,6 +85,12 @@ class Base extends PDO
         return $res;
     }
 
+        /**
+         * atualiza registro do usuario
+         *
+         * @param array $data
+         * @return void
+         */
     public function updateUser(array $data)
     {
         print_r($data);
@@ -94,6 +99,12 @@ class Base extends PDO
         return $res;
     }
 
+    /**
+     * Cria uma nova divida
+     *
+     * @param array $data
+     * @return void
+     */
     public function createDivida(array $data)
     {       
        $res = $this->query('CALL sp_create_divida(:identificador, :valor, :vencimento, :descricao, :user_id)', $data);
@@ -101,6 +112,12 @@ class Base extends PDO
         return $res;
     }
 
+    /**
+     * busca potr uma divida
+     *
+     * @param [type] $id
+     * @return void
+     */
     public function getDivida($id)
     { 
         $stmt = $this->query("SELECT * FROM $this->table WHERE user_id = :user_id", array(
@@ -109,10 +126,12 @@ class Base extends PDO
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
-
+    /**'
+     * atualiza uma divida
+     */
     public function updateDivida(array $data)
     {
-        $res = $this->query("UPDATE $this->table set identificador = :identificador, valor = :valor, vencimento = :vencimento, descricao = :descricao, user_id = :user WHERE id = :id", $data);
+        $res = $this->query("UPDATE $this->table set identificador = :identificador, valor = :valor, vencimento = :vencimento, descricao = :descricao, 'user_id' = :user WHERE id = :id", $data);
 
         return $res;
     }
