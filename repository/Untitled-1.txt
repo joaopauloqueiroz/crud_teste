@@ -1,0 +1,1 @@
+CREATE procedure `sp_user_create`( pname VARCHAR(45), ptelefone varchar(11), pemail varchar(45), pendereco varchar(60) ) BEGIN insert into clientes (nome, telefone, email, endereco) VALUES (pname, ptelefone, pemail, pendereco); SELECT * FROM clientes WHERE id = LAST_INSERT_ID(); END

@@ -1,0 +1,120 @@
+<?php
+class Base extends PDO
+{
+    private $pdo;
+    protected $table;
+
+    public function __construct($table)
+    {
+        $this->pdo = new PDO('mysql:localhost=;dbname=crud_teste', 'root', '');
+        $this->table = $table;
+    }
+
+    /**
+     * Metodo que recebe a query.
+     *
+     * @param [type] $rawQuery
+     * @param array  $params
+     */
+    public function query($rawQuery, $params = array())
+    {
+        $stmt = $this->pdo->prepare($rawQuery);
+        $this->setParams($stmt, $params);
+        
+        $stmt->execute();
+        
+        return $stmt;
+    }
+
+    /**
+     * Metodo prasetar os params.
+     *
+     * @param [type] $statement
+     * @param array  $parameters
+     */
+    private function setParams($statement, $parameters = array())
+    {
+        foreach ($parameters as $key => $value) {
+            $this->setParam($statement, $key, $value);
+        }
+    }
+
+    /**
+     * Seta apenas um parametro.
+     *
+     * @param [type] $statement
+     * @param [type] $key
+     * @param [type] $value
+     */
+    private function setParam($statement, $key, $value)
+    {
+        $statement->bindParam($key, $value);
+    }
+
+    /**
+     * Buscar todos os registros de um usuario.
+     */
+    public function getAll()
+    {
+        $stmt = $this->query("SELECT * FROM $this->table");
+
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    /**
+     * Buscar um registro.
+     */
+    public function get($id)
+    {
+        $stmt = $this->query("SELECT * FROM $this->table WHERE id = :id", array(
+            ':id' => $id,
+        ));
+
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    /**
+     * Criar um novo usuario.
+     *
+     * @param string $user
+     * @param string $pass
+     */
+    public function createUser(array $data)
+    {
+        $res = $this->query("CALL sp_user_create (:nome, :telefone, :email, :endereco)", $data);
+
+        return $res;
+    }
+
+    public function updateUser(array $data)
+    {
+        print_r($data);
+        $res = $this->query("UPDATE $this->table set nome = :nome, telefone = :telefone, email = :email, endereco = :endereco WHERE id = :id", $data);
+
+        return $res;
+    }
+
+    public function createDivida(array $data)
+    {       
+       $res = $this->query('CALL sp_create_divida(:identificador, :valor, :vencimento, :descricao, :user_id)', $data);
+
+        return $res;
+    }
+
+    public function getDivida($id)
+    { 
+        $stmt = $this->query("SELECT * FROM $this->table WHERE user_id = :user_id", array(
+            ':user_id' => $id,
+        ));
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+
+    public function updateDivida(array $data)
+    {
+        $res = $this->query("UPDATE $this->table set identificador = :identificador, valor = :valor, vencimento = :vencimento, descricao = :descricao, user_id = :user WHERE id = :id", $data);
+
+        return $res;
+    }
+
+}
