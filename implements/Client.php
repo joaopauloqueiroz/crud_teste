@@ -19,7 +19,7 @@ class Client
     {
         $data = [
         "nome" => $data['name'],
-        "telefone" => $data['telefone'],
+        "telefone" => preg_replace("/[^0-9]/", "", $data['telefone']),
         "email"  => $data['email'],
         "endereco" => $data['endereco'],
         "id" => $data['id']
@@ -31,7 +31,7 @@ class Client
     {
         $data = [
         "nome" => $data['name'],
-        "telefone" => $data['telefone'],
+        "telefone" => preg_replace("/[^0-9]/", "", $data['telefone']),
         "email"  => $data['email'],
         "endereco" => $data['endereco'],
         ];

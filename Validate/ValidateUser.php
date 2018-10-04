@@ -25,10 +25,12 @@ class ValidateUser
         }
     }
 
-
     public function validaTelefone($telefone)
     {
+        $telefone = preg_replace("/[^0-9]/", "", $telefone);
+
         $is = preg_match('/(\(?\d{2}\)?) ?9?\d{4}-?\d{4}/', $telefone);
+        
         if ($is && strlen($telefone) == 11) {
             return true;
         } else {
