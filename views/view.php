@@ -4,21 +4,11 @@ $cli = new Client();
 require_once '../implements/Divida.php';
 $data = $cli->query->get($_POST['ver']);
 $div = new Divida;
-?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+include('header.php');
+?>
+  
    
-    
-    <title>Crud</title>
-</head>
-<body>
-    
     <div class="container">
     <div class="row">
     <h1>Detalhes</h1>
@@ -58,9 +48,15 @@ $div = new Divida;
         <td>'.$value->descricao.'</td>
         <td>
             <form action="../views/form-dividas.php" method="post" style="display: inline;">
-            <input type="hidden" name="update"><input type="hidden" name="id" value="'.$data[0]->id.'">
+            <input type="hidden" name="update"><input type="hidden" name="id" value="'.$value->id.'">
             <input type="hidden" name="user_id" value="'.$value->user_id.'">
                 <input type="submit" value="Editar" class="btn btn-primary">
+            </form>
+
+            <form action="../save/deletar.php" method="post" style="display: inline;">
+            <input type="hidden" name="delete_div">
+            <input type="hidden" name="id" value="'.$value->id.'">
+                <input type="submit" value="Deletar" class="btn btn-danger">
             </form>
             
         </td>
@@ -75,9 +71,6 @@ $div = new Divida;
         <input type="submit" value="Nova Divida" value="div" class="btn btn-success">
    </form>
 </div>
-    </div>
-
-
-
-</body>
-</html>
+<?php 
+  include "footer.php";
+ ?>

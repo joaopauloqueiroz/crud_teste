@@ -7,24 +7,12 @@
   
 if (isset($_POST['update'])) {
     if ($valid->validate($_POST)) {
-        $res = $div->query->updateDivida(array(
-      "identificador" => $_POST['identificador'],
-      "valor" => 100.00,
-      "vencimento" => $_POST['vencimento'],
-      "descricao" => $_POST['descricao'],
-      "user_id" => $_POST['user_id'],
-      "id" => $_POST['update_id']
-  ));
-  header("location: http://localhost/Crud/views/");
+        $res = $div->query->updateDivida(
+          $div->setValuesInsert($_POST)
+        );
+  header("location: http://localhost/crud_teste/views");
 }else{
-  $data = [
-    "identificador" => $_POST['identificador'],
-      "valor" => $_POST['valor'],
-      "vencimento" => $_POST['vencimento'],
-      "descricao" => $_POST['descricao'],
-      "user" => $_POST['id']
-      
-  ];
+  $data = $div->setValues($_POST);
   $data = (Object) $data;
   $erro =  "<div class='alert alert-danger'>Os campos precisão ser preenchidos corretamente!</div>";
   include "../views/form-dividas.php";
@@ -32,23 +20,12 @@ if (isset($_POST['update'])) {
 
 }else{
     if ($valid->validate($_POST)) {
-        $res = $div->query->createDivida(array(
-      "identificador" => $_POST['identificador'],
-      "valor" => $_POST['valor'],
-      "vencimento" => $_POST['vencimento'],
-      "descricao" => $_POST['descricao'],
-      "user_id" => $_POST['id'],
-  ));
-  header("location: http://localhost/Crud/views/");
+        $res = $div->query->createDivida(
+          $div->setValues($_POST)
+  );
+  header("location: http://localhost/crud_teste/views/");
     } else {
-        $data = [
-    "identificador" => $_POST['identificador'],
-      "valor" => $_POST['valor'],
-      "vencimento" => $_POST['vencimento'],
-      "descricao" => $_POST['descricao'],
-      "user_id" => $_POST['id']
-      
-  ];
+        $data = $div->setValues($_POST);
         $data = (Object) $data;
         $erro =  "<div class='alert alert-danger'>Os campos precisão ser preenchidos corretamente!</div>";
         include "../views/form-dividas.php";

@@ -1,25 +1,11 @@
 
 <?php
-    
+    include "header.php";
     require_once '../implements/Client.php';
     
     $cli = new Client;
 
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-   
-    
-    <title>Crud</title>
-</head>
-
-<body>
     <div class="container">
     <div class="form-group">
     <h1>Listagem de Usuarios</h1>
@@ -61,12 +47,13 @@
     </table>
 
 
-    <form action="form" method="post">
+    <form action="form.php" method="post">
         <input type="hidden" name="novo" value="1">
         <input type="submit" value="Novo" class="btn btn-success">
     </form>
 </div>
-    </div>
+<?php 
+ 
+  include "footer.php";
 
-</body>
-</html>
+ ?>

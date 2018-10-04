@@ -1,19 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    
-    <title>Crud</title>
-</head>
-<body>
+<?php 
+ 
+  include "header.php";
+
+ ?>
     
     <div class="container">
-    
-    
-
     <form action="../save/novo.php" class="form" method="post">
     <?php 
     echo (isset($erro )? $erro : "");
@@ -26,8 +17,7 @@
         require_once "../implements/Client.php";
         echo '<input type="hidden" name="id" value="'.$_POST['edit'].'">';
         $cli = new Client;
-        
-        $data = $cli->query->get(1)[0];
+        $data = $cli->query->get($_POST['edit'])[0];
     }
     ?>
     <div class="row">
@@ -56,5 +46,8 @@
 </form>
  </div>
 
-</body>
-</html>
+<?php 
+ 
+  include "footer.php";
+
+ ?>>

@@ -1,8 +1,15 @@
 <?php
 require_once '../implements/Client.php';
+require_once '../implements/Divida.php';
 $cli = new Client;
-print_r($_POST['id']);
+$div = new Divida;
+
+if(isset($_POST['delete_div'])){
+	$div->query->delete($_POST['id']);	
+}else{
 $res = $cli->query->delete($_POST['id']);
-header('location: http://localhost/Crud/views/');
+}
+
+header('location: http://localhost/crud_teste/views/');
 
 ?>

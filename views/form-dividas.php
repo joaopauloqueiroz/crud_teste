@@ -1,30 +1,19 @@
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  
-    
-    <title>Crud</title>
-</head>
-<body>
+<?php 
+  include "header.php";
+ ?>
     
     <div class="container">
     <div class="row">
   <form action="../save/divida.php" method="post" class="form">
   <?php
     echo (isset($erro )? $erro : "");
+
     if(isset($_POST['update'])){
       echo "<h1>Editar Divida</h1>";
       echo '<input type="hidden" name="update">';
-     
       require_once "../implements/Divida.php";
       $div = new Divida;
-      $data = $div->query->getDivida($_POST['id'])[0];
+      $data = $div->query->getDividaUser($_POST['id'])[0];
       echo '<input type="hidden" name="update_id" value="'.$data->id.'">';
   }else{
     echo "<h1>Nova Divida</h1>";
@@ -51,7 +40,9 @@
     <input type="submit" value="Salvar" class="btn btn-success">
   </form>
 </div>
-    </div>
 
-</body>
-</html>
+<?php 
+ 
+  include "footer.php";
+
+ ?>

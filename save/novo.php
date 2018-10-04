@@ -8,22 +8,14 @@ $valid = new ValidateUser;
 if (isset($_POST['update'])) {
 
     if ($valid->validate($_POST)) {
-        $res = $cli->query->updateUser(array(
-        "nome" => $_POST['name'],
-        "telefone" => $_POST['telefone'],
-        "email"  => $_POST['email'],
-        "endereco" => $_POST['endereco'],
-        "id" => $_POST['id']
-    ));
-        header('location: http://localhost/Crud/views/');
+        
+        $res = $cli->query->updateUser(
+            $cli->setValues($_POST)
+        );
+        header('location: http://localhost/crud_teste/views/index.php');
     } else {
-        $data = [
-        "nome" => $_POST['name'],
-        "telefone" => $_POST['telefone'],
-        "email" => $_POST['email'],
-        "endereco" => $_POST['endereco']
+        $data = $cli->setValues($_POST);
 
-    ];
         $data = (Object) $data;
         $erro =  "<div class='alert alert-danger'>Os campos precisão ser preenchidos corretamente!</div>";
         include "../views/form.php";
@@ -31,21 +23,13 @@ if (isset($_POST['update'])) {
 
 }else{
     if ($valid->validate($_POST)) {
-        $res = $cli->query->createUser(array(
-        "nome" => $_POST['name'],
-        "telefone" => $_POST['telefone'],
-        "email"  => $_POST['email'],
-        "endereco" => $_POST['endereco']
-    ));
-        header('location: http://localhost/Crud/views/');
+        $res = $cli->query->createUser(
+            $cli->setValuesInsert($_POST)
+        );
+        header('location: http://localhost/crud_teste/views/');
     } else {
-        $data = [
-        "nome" => $_POST['name'],
-        "telefone" => $_POST['telefone'],
-        "email" => $_POST['email'],
-        "endereco" => $_POST['endereco']
+        $data = $cli->setValuesInsert($_POST);
 
-    ];
         $data = (Object) $data;
         $erro =  "<div class='alert alert-danger'>Os campos precisão ser preenchidos corretamente!</div>";
         include "../views/form.php";

@@ -6,7 +6,7 @@ class Base extends PDO
 
     public function __construct($table)
     {
-        $this->pdo = new PDO('mysql:localhost=;dbname=crud_teste', 'root', '');
+        $this->pdo = new PDO('mysql:localhost=;dbname=crud_teste', 'root', '180461');
         $this->table = $table;
     }
 
@@ -21,7 +21,7 @@ class Base extends PDO
         $stmt = $this->pdo->prepare($rawQuery);
         $this->setParams($stmt, $params);
         
-        $stmt->execute();
+        $stmt->execute();  
         return $stmt;
     }
 
@@ -93,7 +93,6 @@ class Base extends PDO
          */
     public function updateUser(array $data)
     {
-        print_r($data);
         $res = $this->query("UPDATE $this->table set nome = :nome, telefone = :telefone, email = :email, endereco = :endereco WHERE id = :id", $data);
 
         return $res;
@@ -126,12 +125,19 @@ class Base extends PDO
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+      public function getDividaUser($id){
+        $stmt = $this->query("SELECT * FROM $this->table WHERE id = :id", array(
+            ':id' => $id,
+        ));
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
     /**'
      * atualiza uma divida
      */
     public function updateDivida(array $data)
     {
-        $res = $this->query("UPDATE $this->table set identificador = :identificador, valor = :valor, vencimento = :vencimento, descricao = :descricao, 'user_id' = :user WHERE id = :id", $data);
+    $this->query("CALL sp_update (:identificador, :valor, :vencimento, :descricao, :user_id, :id)",$data);
 
         return $res;
     }
