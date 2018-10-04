@@ -29,7 +29,7 @@
     </div>
     <div class="form-group">
     <label for="telefone">Telefone</label>
-        <input type="text" name="telefone" value="<?php echo (isset($data))? $data->telefone : "" ;?>" id="telefone" class="form-control" placeholder="Sobrenome">
+        <input type="text" name="telefone" value="<?php echo (isset($data))? $data->telefone : "" ;?>" id="telefone" class="form-control telefone" placeholder="Sobrenome">
     </div>
     <div class="form-group">
     <label for="email">E-mail</label>

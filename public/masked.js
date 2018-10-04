@@ -1,0 +1,3 @@
+$(function(){
+	$(".telefone").mask("(##) #####-####",{placeholder:" "});
+});

@@ -27,7 +27,7 @@ include('header.php');
    </div>
    <div class="form-group">
    <label for="">Telefone: </label>
-   <?php echo $data->telefone; ?>
+   <span class="telefone"><?php echo $data->telefone; ?></span>
    </div>
    <div class="form-group">
    <label for="">E-mail: </label>

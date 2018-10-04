@@ -21,7 +21,7 @@
             foreach ($cli->query->getAll() as $value) {
                 echo '<tr>
         <td>'.$value->nome.'</td>
-        <td>'.$value->telefone.'</td>
+        <td class="telefone">'.$value->telefone.'</td>
         <td>'.$value->email.'</td>
         <td class="d-inline">
             <form action="view.php" method="post" style="display: inline;">
