@@ -49,10 +49,10 @@
 
     <form action="form.php" method="post">
         <input type="hidden" name="novo" value="1">
-        <input type="submit" value="Novo" class="btn btn-success">
+        <input type="submit" value="Novo Usuario" class="btn btn-success">
     </form>
 </div>
-<?php 
+<?php
  
   include "footer.php";
 

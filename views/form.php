@@ -1,4 +1,4 @@
-<?php 
+<?php
  
   include "header.php";
 
@@ -6,12 +6,13 @@
     
     <div class="container">
     <form action="../save/novo.php" class="form" method="post">
-    <?php 
-    echo (isset($erro )? $erro : "");
+    <a href="../views/" class="btn btn-primary" style="float:right; margin-top: 2%;">Home</a>
+    <?php
+    
  
-    if(isset($_POST['novo'])){
+    if (isset($_POST['novo'])) {
         echo "<h1>Novo Usuario</h1>";
-    }else{
+    } else {
         echo "<h1>Editar Usuario</h1>";
         echo '<input type="hidden" name="update">';
         require_once "../implements/Client.php";
@@ -19,6 +20,7 @@
         $cli = new Client;
         $data = $cli->query->get($_POST['edit'])[0];
     }
+    echo(isset($erro)? $erro : "");
     ?>
     <div class="row">
     <div class="form-group">
@@ -46,7 +48,7 @@
 </form>
  </div>
 
-<?php 
+<?php
  
   include "footer.php";
 

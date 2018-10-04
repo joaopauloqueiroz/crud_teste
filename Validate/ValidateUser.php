@@ -8,7 +8,7 @@ class ValidateUser
             $tel = $this->validaTelefone($data['telefone']);
             $mail = $this->validaEmail($data['email']);
             
-            if ($mail) {
+            if ($mail && $tel) {
                 return true;
             } else {
                 return false;
@@ -28,7 +28,8 @@ class ValidateUser
 
     public function validaTelefone($telefone)
     {
-        if (preg_match('/(\()?(10)|([1-9]){2}\)?((-|\s)?)([2-9][0-9]{3}((-|\s)?)[0-9]{4,5})/', $telefone) > 0) {
+        $is = preg_match('/(\(?\d{2}\)?) ?9?\d{4}-?\d{4}/', $telefone);
+        if ($is && strlen($telefone) == 11) {
             return true;
         } else {
             return false;

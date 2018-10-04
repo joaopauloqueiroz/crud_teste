@@ -6,7 +6,7 @@ class Base extends PDO
 
     public function __construct($table)
     {
-        $this->pdo = new PDO('mysql:localhost=;dbname=crud_teste', 'root', '180461');
+        $this->pdo = new PDO('mysql:localhost=;dbname=crud_teste', 'root', '');
         $this->table = $table;
     }
 
@@ -21,7 +21,7 @@ class Base extends PDO
         $stmt = $this->pdo->prepare($rawQuery);
         $this->setParams($stmt, $params);
         
-        $stmt->execute();  
+        $stmt->execute();
         return $stmt;
     }
 
@@ -68,7 +68,6 @@ class Base extends PDO
         $stmt = $this->query("SELECT * FROM $this->table WHERE id = :id", array(
             ':id' => $id,
         ));
-
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
@@ -85,12 +84,12 @@ class Base extends PDO
         return $res;
     }
 
-        /**
-         * atualiza registro do usuario
-         *
-         * @param array $data
-         * @return void
-         */
+    /**
+     * atualiza registro do usuario
+     *
+     * @param array $data
+     * @return void
+     */
     public function updateUser(array $data)
     {
         $res = $this->query("UPDATE $this->table set nome = :nome, telefone = :telefone, email = :email, endereco = :endereco WHERE id = :id", $data);
@@ -105,8 +104,8 @@ class Base extends PDO
      * @return void
      */
     public function createDivida(array $data)
-    {       
-       $res = $this->query('CALL sp_create_divida(:identificador, :valor, :vencimento, :descricao, :user_id)', $data);
+    {
+        $res = $this->query('CALL sp_create_divida(:identificador, :valor, :vencimento, :descricao, :user_id)', $data);
 
         return $res;
     }
@@ -118,14 +117,15 @@ class Base extends PDO
      * @return void
      */
     public function getDivida($id)
-    { 
+    {
         $stmt = $this->query("SELECT * FROM $this->table WHERE user_id = :user_id", array(
             ':user_id' => $id,
         ));
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
-      public function getDividaUser($id){
+    public function getDividaUser($id)
+    {
         $stmt = $this->query("SELECT * FROM $this->table WHERE id = :id", array(
             ':id' => $id,
         ));
@@ -137,7 +137,7 @@ class Base extends PDO
      */
     public function updateDivida(array $data)
     {
-    $this->query("CALL sp_update (:identificador, :valor, :vencimento, :descricao, :user_id, :id)",$data);
+       $res = $this->query("CALL sp_update (:identificador, :valor, :vencimento, :descricao, :user_id, :id)", $data);
 
         return $res;
     }
@@ -145,9 +145,10 @@ class Base extends PDO
      * Dletar um registro
      */
 
-     public function delete($id){
+    public function delete($id)
+    {
         $this->query("DELETE FROM $this->table WHERE id = :id", array(
             ":id" => $id,
         ));
-     }
+    }
 }

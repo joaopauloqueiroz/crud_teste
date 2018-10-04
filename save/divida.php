@@ -10,20 +10,22 @@ if (isset($_POST['update'])) {
         $res = $div->query->updateDivida(
           $div->setValuesInsert($_POST)
         );
-  header("location: http://localhost/crud_teste/views");
-}else{
-  $data = $div->setValues($_POST);
-  $data = (Object) $data;
-  $erro =  "<div class='alert alert-danger'>Os campos precisão ser preenchidos corretamente!</div>";
-  include "../views/form-dividas.php";
-}
-
-}else{
+        
+        $id_find = $_POST['user_id'];
+        include("../views/view.php");
+    } else {
+        $data = $div->setValues($_POST);
+        $data = (Object) $data;
+        $erro =  "<div class='alert alert-danger'>Os campos precisão ser preenchidos corretamente!</div>";
+        include "../views/form-dividas.php";
+    }
+} else {
     if ($valid->validate($_POST)) {
         $res = $div->query->createDivida(
           $div->setValues($_POST)
   );
-  header("location: http://localhost/crud_teste/views/");
+        $id_find = $_POST['id'];
+        include("../views/view.php");
     } else {
         $data = $div->setValues($_POST);
         $data = (Object) $data;
@@ -31,4 +33,3 @@ if (isset($_POST['update'])) {
         include "../views/form-dividas.php";
     }
 }
-?>

@@ -8,8 +8,7 @@ $valid = new ValidateUser;
 if (isset($_POST['update'])) {
 
     if ($valid->validate($_POST)) {
-        
-        $res = $cli->query->updateUser(
+            $res = $cli->query->updateUser(
             $cli->setValues($_POST)
         );
         header('location: http://localhost/crud_teste/views/index.php');
