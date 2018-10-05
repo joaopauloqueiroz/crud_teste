@@ -4,16 +4,22 @@ class ValidateUser
 {
     public function validate($data)
     {
-        if (!empty($data['name']) || empty($data['telefone']) || empty($data['email']) || empty($data['endereco'])) {
+        $erros = array();
+        if (!empty($data['name']) || !empty($data['telefone']) || !empty($data['email']) || !empty($data['endereco'])) {
             $tel = $this->validaTelefone($data['telefone']);
             $mail = $this->validaEmail($data['email']);
             
-            if ($mail && $tel) {
-                return true;
-            } else {
-                return false;
+            if (!$mail) {
+                array_push($erros, "O campo E-mail não foi preenchido corretamente");
             }
+            if (!$tel) {
+                array_push($erros, "O campo Telefone não foi preenchido corretamente");
+            }
+        } else {
+            array_push($erros, "Todos os campos precisam ser preenchidos");
         }
+        
+        return $erros;
     }
 
     public function validaEmail($mail)
