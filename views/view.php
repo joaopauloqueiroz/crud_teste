@@ -47,8 +47,9 @@ include('header.php');
             <th>Ação</th>
         </tr>
         <?php
-
-        foreach ($div->query->getDivida($id) as $value) {
+        $data = $div->query->getDivida($id);
+        foreach ($data as $value) {
+            $id = $value->user_id;
             echo '<tr>
         <td>'.$value->identificador.'</td>
         <td>'.$value->valor.'</td>
@@ -61,7 +62,7 @@ include('header.php');
                 <input type="submit" value="Editar" class="btn btn-primary">
             </form>
 
-            <form action="../save/deletar.php" method="post" style="display: inline;">
+            <form action="../save/Deletar.php" method="post" style="display: inline;">
             <input type="hidden" name="delete_div" value="'.$value->id.'">
             <input type="hidden" name="id" value="'.$id.'">
                 <input type="submit" value="Deletar" class="btn btn-danger">
@@ -75,7 +76,7 @@ include('header.php');
 
    <form action="../views/form-dividas.php" method="post">
    
-   <input type="hidden" name="id" value="<?php echo $_POST['ver'];?>">
+   <input type="hidden" name="id" value="<?php echo $data[0]->user_id;?>">
         <input type="submit" value="Nova Divida" value="div" class="btn btn-success">
    </form>
 </div>

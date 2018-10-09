@@ -8,35 +8,15 @@ class Client
     protected $email;
     protected $telefone;
     protected $endereco;
-
+    protected $id;
+    
+    
     public $query;
     public function __construct()
     {
         $this->query = new Base("clientes");
     }
 
-    public function setValues($data):array
-    {
-        $data = [
-        "nome" => $data['name'],
-        "telefone" => preg_replace("/[^0-9]/", "", $data['telefone']),
-        "email"  => $data['email'],
-        "endereco" => $data['endereco'],
-        "id" => $data['id']
-        ];
-        return $data;
-    }
-
-    public function setValuesInsert($data):array
-    {
-        $data = [
-        "nome" => $data['name'],
-        "telefone" => preg_replace("/[^0-9]/", "", $data['telefone']),
-        "email"  => $data['email'],
-        "endereco" => $data['endereco'],
-        ];
-        return $data;
-    }
 
     /**
      * Get the value of endereco
@@ -114,6 +94,27 @@ class Client
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+
+    /**
+     * Get the value of id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set the value of id
+     *
+     * @return  self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
 
         return $this;
     }

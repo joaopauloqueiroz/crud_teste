@@ -1,14 +1,18 @@
 <?php
-
+require_once "../implements/Client.php";
 class ValidateUser
 {
-    public function validate($data)
+    public function validate(Client $data)
     {
         $erros = array();
-        if (!empty($data['name']) || !empty($data['telefone']) || !empty($data['email']) || !empty($data['endereco'])) {
-            $tel = $this->validaTelefone($data['telefone']);
-            $mail = $this->validaEmail($data['email']);
+        if (!empty($data->getName()) || !empty($data->getTelefone()) || !empty($data->getEmail()) || !empty($data->getEndereco())) {
+            $tel = $this->validaTelefone($data->getTelefone());
+            $mail = $this->validaEmail($data->getEmail());
             
+            if (empty($data->getName())) {
+                array_push($erros, "O campo nome precisa ser preenchido corretamente");
+            }
+
             if (!$mail) {
                 array_push($erros, "O campo E-mail não foi preenchido corretamente");
             }
